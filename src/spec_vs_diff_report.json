@@ -1,0 +1,30 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-15T18:47:10.550Z",
+  "summary": "REQ-7 appears implemented by removing the Transformation section from the Home page composition. REQ-8 appears implemented by enhancing the shared Footer with company name, description, and quick links. The Footer also adds extra, unrequested elements (contact info and caffeine.ai attribution/UTM tracking).",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Footer adds a new \"Get In Touch\" contact info block (location and phone number) beyond the requested company name/description/quick links.",
+      "reason": "REQ-8 only requested (1) company name, (2) short description, and (3) quick links; contact info was not requested.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx"
+      ]
+    },
+    {
+      "description": "Footer adds a \"Built with … using caffeine.ai\" attribution link including UTM tracking based on hostname, plus a heart icon.",
+      "reason": "Not requested in REQ-8; introduces new external outbound link/tracking behavior not mentioned in requirements.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "project_state.json"
+  ]
+}

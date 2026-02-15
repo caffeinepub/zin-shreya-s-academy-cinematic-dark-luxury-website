@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-remove-the-your-transformation-starts-here-section-from-the-home-page-so-it-no-longer-renders-anywhere-on-the-route",
+      "title": "Remove the \"Your Transformation Starts Here\" section from the Home page so it no longer renders anywhere on the / route.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-site-footer-to-include-1-the-company-name-2-a-short-description-and-3-quick-links-to-the-main-website-pages-home-about-us-courses-contact-us-keep-styling-consistent-with-the-existing-cinematic-dark-luxury-theme",
+      "title": "Update the site footer to include: (1) the company name, (2) a short description, and (3) quick links to the main website pages (Home, About Us, Courses, Contact Us). Keep styling consistent with the existing cinematic dark luxury theme.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Remove the \"your transformation- start here\" section from the home page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add a website footer containing company name, a short description, and quick links",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Remove Transformation section from Home page and add enhanced footer with quick links",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

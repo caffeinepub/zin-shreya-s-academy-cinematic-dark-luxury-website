@@ -1,0 +1,41 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-remove-the-your-transformation-starts-here-section-from-the-home-page-so-it-no-longer-renders-anywhere-on-the-route",
+      "featureTitle": "Remove the \"Your Transformation Starts Here\" section from the Home page so it no longer renders anywhere on the / route.",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-site-footer-to-include-1-the-company-name-2-a-short-description-and-3-quick-links-to-the-main-website-pages-home-about-us-courses-contact-us-keep-styling-consistent-with-the-existing-cinematic-dark-luxury-theme",
+      "featureTitle": "Update the site footer to include: (1) the company name, (2) a short description, and (3) quick links to the main website pages (Home, About Us, Courses, Contact Us). Keep styling consistent with the existing cinematic dark luxury theme.",
+      "files": [
+        "frontend/src/components/Footer.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

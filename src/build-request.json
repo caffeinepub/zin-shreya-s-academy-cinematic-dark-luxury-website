@@ -1,0 +1,68 @@
+{
+  "kind": "build_request",
+  "title": "Remove Transformation section from Home page and add enhanced footer with quick links",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Remove the \"Your Transformation Starts Here\" section from the Home page so it no longer renders anywhere on the / route.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "remove that \" your transformation- start here \" section fully from the home page"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navigating to the Home page (/) does not display the Transformation section content (including the 'Your Transformation' / 'Starts Here' text).",
+        "No empty spacing or visual gaps remain where the section previously appeared.",
+        "Build passes with no unused-import TypeScript errors (e.g., TransformationSection is not imported if not used)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Update the site footer to include: (1) the company name, (2) a short description, and (3) quick links to the main website pages (Home, About Us, Courses, Contact Us). Keep styling consistent with the existing cinematic dark luxury theme.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "add a footer to the website which must contact company name , a small description and quick links of the website."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Footer displays the company name \"ZIN SHREYA'S ACADEMY\".",
+        "Footer includes a short descriptive sentence/paragraph in English.",
+        "Footer includes quick links that navigate to: /, /about, /courses, /contact.",
+        "Footer renders across all pages via the shared layout (not only on the Home page).",
+        "Footer is responsive (links remain usable and readable on mobile and desktop)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui or any paths listed as immutable in SYSTEM_CONTEXT.",
+    "Do not introduce new backend services or external databases; this change should be frontend-only."
+  ],
+  "nonGoals": [
+    "Do not add new routes/pages beyond the existing Home, About Us, Courses, Contact Us pages.",
+    "Do not change Internet Identity/authentication behavior.",
+    "Do not add or require any backend canister logic for the footer or homepage sections."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

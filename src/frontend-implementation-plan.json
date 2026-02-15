@@ -1,0 +1,46 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Remove Transformation section from Home page and add enhanced footer with quick links",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "summary": "Remove the Transformation section from the Home page so it does not render on the / route.",
+      "acceptanceCriteria": [
+        "Navigating to the Home page (/) does not display the Transformation section content (including the 'Your Transformation' / 'Starts Here' text).",
+        "No empty spacing or visual gaps remain where the section previously appeared.",
+        "Build passes with no unused-import TypeScript errors (e.g., TransformationSection is not imported if not used)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Remove the TransformationSection import and remove the <TransformationSection /> render from the Home page composition to ensure the section no longer appears on / and no unused-import errors remain."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Enhance the shared site footer with company name, short description, and quick links consistent with the cinematic dark luxury theme.",
+      "acceptanceCriteria": [
+        "Footer displays the company name \"ZIN SHREYA'S ACADEMY\".",
+        "Footer includes a short descriptive sentence/paragraph in English.",
+        "Footer includes quick links that navigate to: /, /about, /courses, /contact.",
+        "Footer renders across all pages via the shared layout (not only on the Home page).",
+        "Footer is responsive (links remain usable and readable on mobile and desktop)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Update the Footer layout to include: (1) prominent company name \"ZIN SHREYA'S ACADEMY\", (2) a short English description, and (3) a responsive quick-links section using internal navigation to /, /about, /courses, /contact; keep styling aligned with the existing dark luxury theme and retain existing year/attribution as appropriate."
+        },
+        {
+          "path": "frontend/src/layouts/SiteLayout.tsx",
+          "operation": "modify",
+          "description": "Verify the shared layout continues to render the updated <Footer /> across all routes; adjust layout spacing/structure only if needed to keep the footer visually consistent and responsive site-wide."
+        }
+      ]
+    }
+  ]
+}
