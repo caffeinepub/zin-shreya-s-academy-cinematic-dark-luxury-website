@@ -3,277 +3,254 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-        --radius: 1rem;
-        
-        /* Dark Luxury Theme */
-        --dark: 0.04 0 0;
-        --dark-lighter: 0.08 0 0;
-        --rose-gold: 0.65 0.15 25;
-        --gold: 0.75 0.12 65;
-        
-        /* Base Colors */
-        --background: 0.04 0 0;
-        --foreground: 0.98 0 0;
-        --card: 0.08 0 0;
-        --card-foreground: 0.98 0 0;
-        --popover: 0.08 0 0;
-        --popover-foreground: 0.98 0 0;
-        --primary: 0.65 0.15 25;
-        --primary-foreground: 0.04 0 0;
-        --secondary: 0.75 0.12 65;
-        --secondary-foreground: 0.04 0 0;
-        --muted: 0.15 0 0;
-        --muted-foreground: 0.60 0 0;
-        --accent: 0.65 0.15 25;
-        --accent-foreground: 0.04 0 0;
-        --destructive: 0.577 0.245 27.325;
-        --destructive-foreground: 0.98 0 0;
-        --border: 1 0 0 / 10%;
-        --input: 1 0 0 / 15%;
-        --ring: 0.65 0.15 25;
-    }
-
-    * {
-        @apply border-border;
-    }
+  :root {
+    /* Dark luxury theme colors in OKLCH */
+    --dark: 0.15 0.01 264;
+    --dark-lighter: 0.20 0.01 264;
+    --rose-gold: 0.70 0.15 25;
+    --gold: 0.75 0.18 75;
     
-    body {
-        @apply bg-dark text-foreground antialiased;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
+    /* Shadcn UI tokens */
+    --background: 0.15 0.01 264;
+    --foreground: 0.98 0 0;
+    
+    --card: 0.18 0.01 264;
+    --card-foreground: 0.98 0 0;
+    
+    --popover: 0.18 0.01 264;
+    --popover-foreground: 0.98 0 0;
+    
+    --primary: 0.70 0.15 25;
+    --primary-foreground: 0.15 0.01 264;
+    
+    --secondary: 0.75 0.18 75;
+    --secondary-foreground: 0.15 0.01 264;
+    
+    --muted: 0.25 0.01 264;
+    --muted-foreground: 0.65 0.01 264;
+    
+    --accent: 0.70 0.15 25;
+    --accent-foreground: 0.15 0.01 264;
+    
+    --destructive: 0.55 0.25 25;
+    --destructive-foreground: 0.98 0 0;
+    
+    --border: 0.30 0.01 264;
+    --input: 0.30 0.01 264;
+    --ring: 0.70 0.15 25;
+    
+    --radius: 0.75rem;
+  }
+}
 
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        font-weight: 900;
-        letter-spacing: -0.02em;
-    }
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-dark text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer utilities {
-    /* Custom Colors */
-    .bg-dark {
-        background-color: oklch(var(--dark));
+  /* Cinematic Background Canvas */
+  .cinematic-background-canvas {
+    @apply fixed inset-0 w-full h-full pointer-events-none;
+    z-index: 0;
+  }
+  
+  /* Glassmorphism */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .glass-card-hover {
+    @apply glass-card hover:bg-white/10 hover:border-white/20 transition-all duration-300;
+  }
+  
+  /* Gradient utilities */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+  
+  /* Glow effects */
+  .glow-rose-gold {
+    box-shadow: 0 0 20px oklch(var(--rose-gold) / 0.3),
+                0 0 40px oklch(var(--rose-gold) / 0.2),
+                0 0 60px oklch(var(--rose-gold) / 0.1);
+  }
+  
+  .glow-gold {
+    box-shadow: 0 0 20px oklch(var(--gold) / 0.3),
+                0 0 40px oklch(var(--gold) / 0.2),
+                0 0 60px oklch(var(--gold) / 0.1);
+  }
+  
+  /* Premium button styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-rose-gold to-gold text-dark font-bold;
+    @apply transition-all duration-300;
+    @apply hover:scale-105 active:scale-95;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 10px 15px -3px oklch(var(--rose-gold) / 0.5), 0 4px 6px -2px oklch(var(--rose-gold) / 0.3);
+  }
+  
+  .btn-outline {
+    @apply border-2 border-rose-gold text-rose-gold bg-transparent;
+    @apply hover:bg-rose-gold hover:text-dark transition-all duration-300;
+    @apply hover:scale-105 active:scale-95;
+  }
+  
+  .btn-whatsapp {
+    @apply bg-gradient-to-r from-green-500 to-green-600 text-white font-bold;
+    @apply transition-all duration-300;
+    @apply hover:scale-105 active:scale-95;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .btn-whatsapp:hover {
+    box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.5), 0 4px 6px -2px rgba(34, 197, 94, 0.3);
+  }
+  
+  /* Animations */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes bounce-subtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes wave-move {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .animate-fade-up {
+    animation: fade-up 0.8s ease-out forwards;
+  }
+  
+  .animate-shimmer {
+    background-size: 200% 200%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+  
+  .animate-wave-move {
+    animation: wave-move 3s linear infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Animation delays */
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
     
-    .bg-dark-lighter {
-        background-color: oklch(var(--dark-lighter));
+    .animate-pulse-slow,
+    .animate-shimmer,
+    .animate-bounce-subtle,
+    .animate-gradient-shift,
+    .animate-wave-move,
+    .animate-float {
+      animation: none !important;
     }
-    
-    .text-rose-gold {
-        color: oklch(var(--rose-gold));
-    }
-    
-    .text-gold {
-        color: oklch(var(--gold));
-    }
-    
-    .bg-rose-gold {
-        background-color: oklch(var(--rose-gold));
-    }
-    
-    .bg-gold {
-        background-color: oklch(var(--gold));
-    }
-    
-    .border-rose-gold {
-        border-color: oklch(var(--rose-gold));
-    }
-
-    /* Gradient Utilities */
-    .bg-gradient-radial {
-        background-image: radial-gradient(circle, var(--tw-gradient-stops));
-    }
-
-    /* Glassmorphism Card */
-    .glass-card {
-        background: linear-gradient(
-            135deg,
-            oklch(var(--dark-lighter) / 0.8),
-            oklch(var(--dark) / 0.6)
-        );
-        backdrop-filter: blur(20px);
-        border: 1px solid oklch(1 0 0 / 0.1);
-        box-shadow: 0 8px 32px 0 oklch(0 0 0 / 0.37);
-    }
-
-    /* Glow Border Effect */
-    .glow-border {
-        position: relative;
-        box-shadow: 
-            0 0 20px oklch(var(--rose-gold) / 0.3),
-            0 0 40px oklch(var(--gold) / 0.2),
-            inset 0 0 20px oklch(var(--rose-gold) / 0.1);
-    }
-
-    .glow-border:hover {
-        box-shadow: 
-            0 0 30px oklch(var(--rose-gold) / 0.5),
-            0 0 60px oklch(var(--gold) / 0.3),
-            inset 0 0 30px oklch(var(--rose-gold) / 0.2);
-    }
-
-    /* Button Styles */
-    .btn-primary {
-        background: linear-gradient(135deg, oklch(var(--rose-gold)), oklch(var(--gold)));
-        color: oklch(var(--dark));
-        font-weight: 700;
-        border: none;
-        box-shadow: 
-            0 4px 20px oklch(var(--rose-gold) / 0.4),
-            0 0 40px oklch(var(--gold) / 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 
-            0 6px 30px oklch(var(--rose-gold) / 0.6),
-            0 0 60px oklch(var(--gold) / 0.4);
-    }
-
-    .btn-outline {
-        background: transparent;
-        color: oklch(var(--rose-gold));
-        border: 2px solid oklch(var(--rose-gold));
-        font-weight: 700;
-        box-shadow: 
-            0 0 20px oklch(var(--rose-gold) / 0.3),
-            inset 0 0 20px oklch(var(--rose-gold) / 0.1);
-        transition: all 0.3s ease;
-    }
-
-    .btn-outline:hover {
-        background: linear-gradient(135deg, oklch(var(--rose-gold) / 0.2), oklch(var(--gold) / 0.2));
-        transform: translateY(-2px);
-        box-shadow: 
-            0 0 30px oklch(var(--rose-gold) / 0.5),
-            inset 0 0 30px oklch(var(--rose-gold) / 0.2);
-    }
-
-    .btn-whatsapp {
-        background: linear-gradient(135deg, #25D366, #128C7E);
-        color: white;
-        font-weight: 700;
-        border: none;
-        box-shadow: 
-            0 4px 20px rgba(37, 211, 102, 0.4),
-            0 0 40px rgba(37, 211, 102, 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .btn-whatsapp:hover {
-        transform: translateY(-2px);
-        box-shadow: 
-            0 6px 30px rgba(37, 211, 102, 0.6),
-            0 0 60px rgba(37, 211, 102, 0.4);
-    }
-
-    /* Animations */
-    @keyframes fade-up {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes shimmer {
-        0%, 100% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-    }
-
-    @keyframes pulse-slow {
-        0%, 100% {
-            opacity: 0.3;
-        }
-        50% {
-            opacity: 0.5;
-        }
-    }
-
-    @keyframes bounce-slow {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
-    }
-
-    .animate-fade-up {
-        animation: fade-up 0.8s ease-out forwards;
-    }
-
-    .animate-shimmer {
-        background-size: 200% 200%;
-        animation: shimmer 3s ease-in-out infinite;
-    }
-
-    .animate-pulse-slow {
-        animation: pulse-slow 4s ease-in-out infinite;
-    }
-
-    .animate-bounce-slow {
-        animation: bounce-slow 2s ease-in-out infinite;
-    }
-
-    .animation-delay-200 {
-        animation-delay: 200ms;
-    }
-
-    .animation-delay-400 {
-        animation-delay: 400ms;
-    }
-
-    .animation-delay-600 {
-        animation-delay: 600ms;
-    }
-
-    /* Flip Card */
-    .flip-card {
-        perspective: 1000px;
-        height: 280px;
-    }
-
-    .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-    }
-
-    .flip-card-back {
-        transform: rotateY(180deg);
-    }
-
-    /* Dark Map Styling */
-    .map-dark {
-        filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
-    }
-
-    /* Smooth Scrolling */
-    html {
-        scroll-behavior: smooth;
-    }
+  }
 }

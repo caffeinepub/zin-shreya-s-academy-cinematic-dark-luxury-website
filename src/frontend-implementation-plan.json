@@ -1,44 +1,112 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Remove Transformation section from Home page and add enhanced footer with quick links",
+  "title": "Restore and enhance site-wide CinematicBackground visibility, quality, and reduced-motion behavior",
   "requirements": [
     {
-      "id": "REQ-7",
-      "summary": "Remove the Transformation section from the Home page so it does not render on the / route.",
+      "id": "REQ-1",
+      "summary": "Ensure the global CinematicBackground canvas is always visible behind all page content via correct stacking context and non-opaque section backdrops.",
       "acceptanceCriteria": [
-        "Navigating to the Home page (/) does not display the Transformation section content (including the 'Your Transformation' / 'Starts Here' text).",
-        "No empty spacing or visual gaps remain where the section previously appeared.",
-        "Build passes with no unused-import TypeScript errors (e.g., TransformationSection is not imported if not used)."
+        "When loading any route (Home, About, Courses, Contact, 404), the animated background is clearly visible behind the page content.",
+        "The background layer does not block clicks/scroll (pointer events remain disabled) and does not shift layout.",
+        "The background remains visible while scrolling and behind the sticky header/footer."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
+          "path": "frontend/src/layouts/SiteLayout.tsx",
           "operation": "modify",
-          "description": "Remove the TransformationSection import and remove the <TransformationSection /> render from the Home page composition to ensure the section no longer appears on / and no unused-import errors remain."
+          "description": "Adjust layout layering so CinematicBackground sits above the document/body background but below all interactive content: remove/avoid an opaque layout background that hides the canvas, and ensure header/main/footer/overlays render in a higher z-layer than the canvas while preserving sticky header behavior."
+        },
+        {
+          "path": "frontend/src/components/CinematicBackground.tsx",
+          "operation": "modify",
+          "description": "Update canvas element positioning/z-index to be a stable site-wide background layer (fixed, viewport-sized) that remains behind all content but above the body background, and continues to ignore pointer events."
+        },
+        {
+          "path": "frontend/src/pages/AboutPage.tsx",
+          "operation": "modify",
+          "description": "Update the page hero/section absolute backdrop layers to avoid fully opaque backgrounds (e.g., replace solid bg-dark with transparent/low-opacity variants) so the global CinematicBackground remains visible behind content throughout the page."
+        },
+        {
+          "path": "frontend/src/pages/CoursesPage.tsx",
+          "operation": "modify",
+          "description": "Update the page hero/section absolute backdrop layers to avoid fully opaque backgrounds so the global CinematicBackground remains visible behind content throughout the page."
+        },
+        {
+          "path": "frontend/src/pages/ContactPage.tsx",
+          "operation": "modify",
+          "description": "Update the page hero/section absolute backdrop layers to avoid fully opaque backgrounds so the global CinematicBackground remains visible behind content throughout the page."
+        },
+        {
+          "path": "frontend/src/pages/NotFoundPage.tsx",
+          "operation": "modify",
+          "description": "Reduce/remove the fully opaque 404 page background backdrop so the global CinematicBackground remains visible behind the 404 content."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add/adjust global utility styles to support consistent background layering (e.g., a shared translucent section-backdrop utility and/or a dedicated background layer class) to prevent opaque sections from obscuring the global canvas."
         }
       ]
     },
     {
-      "id": "REQ-8",
-      "summary": "Enhance the shared site footer with company name, short description, and quick links consistent with the cinematic dark luxury theme.",
+      "id": "REQ-2",
+      "summary": "Make HeroSection overlays decorative and readable without obscuring the global CinematicBackground.",
       "acceptanceCriteria": [
-        "Footer displays the company name \"ZIN SHREYA'S ACADEMY\".",
-        "Footer includes a short descriptive sentence/paragraph in English.",
-        "Footer includes quick links that navigate to: /, /about, /courses, /contact.",
-        "Footer renders across all pages via the shared layout (not only on the Home page).",
-        "Footer is responsive (links remain usable and readable on mobile and desktop)."
+        "On the Home page hero, the global moving background remains visible and cinematic while hero text and CTAs remain readable.",
+        "No full-opaque layer in HeroSection completely blocks the site-wide animated background."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Footer.tsx",
+          "path": "frontend/src/components/HeroSection.tsx",
           "operation": "modify",
-          "description": "Update the Footer layout to include: (1) prominent company name \"ZIN SHREYA'S ACADEMY\", (2) a short English description, and (3) a responsive quick-links section using internal navigation to /, /about, /courses, /contact; keep styling aligned with the existing dark luxury theme and retain existing year/attribution as appropriate."
+          "description": "Replace the HeroSection’s solid/opaque backdrop (e.g., bg-dark) with transparent or low-opacity overlays, keeping the intended gradients/spotlight effects while ensuring the global CinematicBackground is visible underneath."
         },
         {
-          "path": "frontend/src/layouts/SiteLayout.tsx",
+          "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Verify the shared layout continues to render the updated <Footer /> across all routes; adjust layout spacing/structure only if needed to keep the footer visually consistent and responsive site-wide."
+          "description": "If needed for consistency/readability, add a reusable translucent hero-backdrop utility (or tune existing utilities) so the hero remains readable without blocking the global animated background."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Improve CinematicBackground canvas crispness, viewport coverage, resize handling, and animation lifecycle cleanup.",
+      "acceptanceCriteria": [
+        "On high-DPI displays (e.g., Retina), the background looks crisp (not blurry/pixelated).",
+        "Resizing the browser keeps the animation correctly scaled and filling the viewport without distortion.",
+        "No console errors occur related to the background animation lifecycle (mount/unmount/resize)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CinematicBackground.tsx",
+          "operation": "modify",
+          "description": "Refactor canvas sizing to account for devicePixelRatio (CSS size = viewport; internal buffer scaled by DPR and context scaled accordingly), handle resize with stable listeners, keep animation smooth, and ensure requestAnimationFrame is always canceled and listeners removed on unmount to prevent lifecycle errors."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Ensure the canvas uses CSS sizing that reliably covers the viewport (width/height 100%, fixed inset) without affecting layout, including any needed global rules for the background layer class used by CinematicBackground."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Respect prefers-reduced-motion by rendering a static cinematic background instead of running continuous animation.",
+      "acceptanceCriteria": [
+        "If the OS/browser has reduced motion enabled, the background becomes non-animated while still visually cinematic and readable behind content.",
+        "If reduced motion is not enabled, the background animates normally."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CinematicBackground.tsx",
+          "operation": "modify",
+          "description": "Add prefers-reduced-motion detection (e.g., matchMedia) so that when reduced motion is enabled the component renders a single static frame (or static gradient) and does not start/continue requestAnimationFrame; when disabled, animate normally. Include safe cleanup for media query listeners on unmount."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Extend reduced-motion CSS considerations if needed (e.g., ensure any background-related CSS animations or filters used for the cinematic effect are disabled/softened under prefers-reduced-motion) while keeping the static background visually cinematic."
         }
       ]
     }

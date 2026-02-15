@@ -30,9 +30,9 @@ export default function AboutPage() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-dark">
-          <div className="absolute inset-0 bg-gradient-radial from-rose-gold/20 via-transparent to-transparent opacity-40" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/30 via-gold/10 to-transparent blur-3xl animate-pulse-slow" />
+        <div className="absolute inset-0 bg-dark/70">
+          <div className="absolute inset-0 bg-gradient-radial from-rose-gold/10 via-transparent to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/15 via-gold/5 to-transparent blur-3xl animate-pulse-slow" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -51,7 +51,7 @@ export default function AboutPage() {
 
       {/* Our Story */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-lighter to-dark" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80" />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto space-y-12">
@@ -106,8 +106,8 @@ export default function AboutPage() {
 
       {/* Our Values */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-lighter to-dark" />
-        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-gradient-radial from-gold/20 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80" />
+        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-gradient-radial from-gold/10 to-transparent blur-3xl" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fade-up">
@@ -149,8 +149,8 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-lighter to-dark" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/30 via-gold/10 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/15 via-gold/5 to-transparent blur-3xl" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-up">

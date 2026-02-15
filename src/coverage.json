@@ -1,36 +1,75 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T18:47:10.553Z",
+  "generatedAt": "2026-02-15T19:04:16.050Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-7",
-        "summary": "Remove the \"Your Transformation Starts Here\" section from the Home page so it no longer renders anywhere on the / route.",
+        "id": "REQ-1",
+        "summary": "Make the site-wide CinematicBackground canvas reliably visible behind all content on every page by fixing stacking context/z-index layering so it is not rendered behind the document/background or covered by opaque section backgrounds.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/src/layouts/SiteLayout.tsx",
+          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/pages/AboutPage.tsx",
+          "frontend/src/pages/CoursesPage.tsx",
+          "frontend/src/pages/ContactPage.tsx",
+          "frontend/src/pages/NotFoundPage.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/src/layouts/SiteLayout.tsx",
+          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/pages/AboutPage.tsx",
+          "frontend/src/pages/CoursesPage.tsx",
+          "frontend/src/pages/ContactPage.tsx",
+          "frontend/src/pages/NotFoundPage.tsx",
+          "frontend/src/index.css"
         ]
       },
       {
-        "id": "REQ-8",
-        "summary": "Update the site footer to include: (1) the company name, (2) a short description, and (3) quick links to the main website pages (Home, About Us, Courses, Contact Us). Keep styling consistent with the existing cinematic dark luxury theme.",
+        "id": "REQ-2",
+        "summary": "Update HeroSection so its local 'Cinematic Background' overlay does not fully obscure the global CinematicBackground (e.g., remove the opaque `bg-dark` backdrop or make it transparent/low-opacity while keeping any intended decorative overlays).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Footer.tsx",
-          "frontend/src/layouts/SiteLayout.tsx"
+          "frontend/src/components/HeroSection.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
-          "frontend/src/components/Footer.tsx"
+          "frontend/src/components/HeroSection.tsx",
+          "frontend/src/index.css"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Improve CinematicBackground rendering quality and robustness: account for devicePixelRatio in canvas sizing, ensure the canvas covers the viewport via CSS sizing (width/height 100%), and keep animation running smoothly with safe cleanup on unmount.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/index.css"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Add an accessibility/performance fallback for the cinematic background that respects `prefers-reduced-motion: reduce` by rendering a static frame (or a static gradient) instead of running requestAnimationFrame.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/index.css"
         ]
       }
     ]
@@ -40,8 +79,14 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/Footer.tsx",
-    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/components/CinematicBackground.tsx",
+    "frontend/src/components/HeroSection.tsx",
+    "frontend/src/index.css",
+    "frontend/src/layouts/SiteLayout.tsx",
+    "frontend/src/pages/AboutPage.tsx",
+    "frontend/src/pages/ContactPage.tsx",
+    "frontend/src/pages/CoursesPage.tsx",
+    "frontend/src/pages/NotFoundPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

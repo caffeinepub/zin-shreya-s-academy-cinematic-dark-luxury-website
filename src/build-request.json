@@ -1,55 +1,86 @@
 {
   "kind": "build_request",
-  "title": "Remove Transformation section from Home page and add enhanced footer with quick links",
+  "title": "Fix cinematic moving background visibility and make it clearly animated site-wide",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-7",
-      "text": "Remove the \"Your Transformation Starts Here\" section from the Home page so it no longer renders anywhere on the / route.",
+      "id": "REQ-1",
+      "text": "Make the site-wide CinematicBackground canvas reliably visible behind all content on every page by fixing stacking context/z-index layering so it is not rendered behind the document/background or covered by opaque section backgrounds.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "remove that \" your transformation- start here \" section fully from the home page"
+          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
         ]
       },
       "acceptanceCriteria": [
-        "Navigating to the Home page (/) does not display the Transformation section content (including the 'Your Transformation' / 'Starts Here' text).",
-        "No empty spacing or visual gaps remain where the section previously appeared.",
-        "Build passes with no unused-import TypeScript errors (e.g., TransformationSection is not imported if not used)."
+        "When loading any route (Home, About, Courses, Contact, 404), the animated background is clearly visible behind the page content.",
+        "The background layer does not block clicks/scroll (pointer events remain disabled) and does not shift layout.",
+        "The background remains visible while scrolling and behind the sticky header/footer."
       ]
     },
     {
-      "id": "REQ-8",
-      "text": "Update the site footer to include: (1) the company name, (2) a short description, and (3) quick links to the main website pages (Home, About Us, Courses, Contact Us). Keep styling consistent with the existing cinematic dark luxury theme.",
+      "id": "REQ-2",
+      "text": "Update HeroSection so its local 'Cinematic Background' overlay does not fully obscure the global CinematicBackground (e.g., remove the opaque `bg-dark` backdrop or make it transparent/low-opacity while keeping any intended decorative overlays).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "add a footer to the website which must contact company name , a small description and quick links of the website."
+          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
         ]
       },
       "acceptanceCriteria": [
-        "Footer displays the company name \"ZIN SHREYA'S ACADEMY\".",
-        "Footer includes a short descriptive sentence/paragraph in English.",
-        "Footer includes quick links that navigate to: /, /about, /courses, /contact.",
-        "Footer renders across all pages via the shared layout (not only on the Home page).",
-        "Footer is responsive (links remain usable and readable on mobile and desktop)."
+        "On the Home page hero, the global moving background remains visible and cinematic while hero text and CTAs remain readable.",
+        "No full-opaque layer in HeroSection completely blocks the site-wide animated background."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Improve CinematicBackground rendering quality and robustness: account for devicePixelRatio in canvas sizing, ensure the canvas covers the viewport via CSS sizing (width/height 100%), and keep animation running smoothly with safe cleanup on unmount.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On high-DPI displays (e.g., Retina), the background looks crisp (not blurry/pixelated).",
+        "Resizing the browser keeps the animation correctly scaled and filling the viewport without distortion.",
+        "No console errors occur related to the background animation lifecycle (mount/unmount/resize)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add an accessibility/performance fallback for the cinematic background that respects `prefers-reduced-motion: reduce` by rendering a static frame (or a static gradient) instead of running requestAnimationFrame.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If the OS/browser has reduced motion enabled, the background becomes non-animated while still visually cinematic and readable behind content.",
+        "If reduced motion is not enabled, the background animates normally."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui or any paths listed as immutable in SYSTEM_CONTEXT.",
-    "Do not introduce new backend services or external databases; this change should be frontend-only."
+    "Do not edit files under frontend/src/components/ui (Shadcn UI components are read-only).",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths)."
   ],
   "nonGoals": [
-    "Do not add new routes/pages beyond the existing Home, About Us, Courses, Contact Us pages.",
-    "Do not change Internet Identity/authentication behavior.",
-    "Do not add or require any backend canister logic for the footer or homepage sections."
+    "Adding new pages or new business features unrelated to the cinematic background.",
+    "Introducing a new backend canister or backend APIs (this is a frontend-only fix)."
   ],
   "imageRequirements": {
     "required": [],

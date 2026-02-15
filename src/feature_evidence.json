@@ -2,10 +2,16 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-your-transformation-starts-here-section-from-the-home-page-so-it-no-longer-renders-anywhere-on-the-route",
-      "featureTitle": "Remove the \"Your Transformation Starts Here\" section from the Home page so it no longer renders anywhere on the / route.",
+      "featureId": "feature-make-the-site-wide-cinematicbackground-canvas-reliably-visible-behind-all-content-on-every-page-by-fixing-stacking-context-z-index-layering-so-it-is-not-rendered-behind-the-document-background-or-covered-by-opaque-section-backgrounds",
+      "featureTitle": "Make the site-wide CinematicBackground canvas reliably visible behind all content on every page by fixing stacking context/z-index layering so it is not rendered behind the document/background or covered by opaque section backgrounds.",
       "files": [
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/src/components/CinematicBackground.tsx",
+        "frontend/src/index.css",
+        "frontend/src/layouts/SiteLayout.tsx",
+        "frontend/src/pages/AboutPage.tsx",
+        "frontend/src/pages/ContactPage.tsx",
+        "frontend/src/pages/CoursesPage.tsx",
+        "frontend/src/pages/NotFoundPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,15 +21,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-7"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-site-footer-to-include-1-the-company-name-2-a-short-description-and-3-quick-links-to-the-main-website-pages-home-about-us-courses-contact-us-keep-styling-consistent-with-the-existing-cinematic-dark-luxury-theme",
-      "featureTitle": "Update the site footer to include: (1) the company name, (2) a short description, and (3) quick links to the main website pages (Home, About Us, Courses, Contact Us). Keep styling consistent with the existing cinematic dark luxury theme.",
+      "featureId": "feature-update-herosection-so-its-local-cinematic-background-overlay-does-not-fully-obscure-the-global-cinematicbackground-e-g-remove-the-opaque-bg-dark-backdrop-or-make-it-transparent-low-opacity-while-keeping-any-intended-decorative-overlays",
+      "featureTitle": "Update HeroSection so its local 'Cinematic Background' overlay does not fully obscure the global CinematicBackground (e.g., remove the opaque `bg-dark` backdrop or make it transparent/low-opacity while keeping any intended decorative overlays).",
       "files": [
-        "frontend/src/components/Footer.tsx"
+        "frontend/src/components/HeroSection.tsx",
+        "frontend/src/index.css"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,7 +40,45 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-8"
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-improve-cinematicbackground-rendering-quality-and-robustness-account-for-devicepixelratio-in-canvas-sizing-ensure-the-canvas-covers-the-viewport-via-css-sizing-width-height-100-and-keep-animation-running-smoothly-with-safe-cleanup-on-unmount",
+      "featureTitle": "Improve CinematicBackground rendering quality and robustness: account for devicePixelRatio in canvas sizing, ensure the canvas covers the viewport via CSS sizing (width/height 100%), and keep animation running smoothly with safe cleanup on unmount.",
+      "files": [
+        "frontend/src/components/CinematicBackground.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-accessibility-performance-fallback-for-the-cinematic-background-that-respects-prefers-reduced-motion-reduce-by-rendering-a-static-frame-or-a-static-gradient-instead-of-running-requestanimationframe",
+      "featureTitle": "Add an accessibility/performance fallback for the cinematic background that respects `prefers-reduced-motion: reduce` by rendering a static frame (or a static gradient) instead of running requestAnimationFrame.",
+      "files": [
+        "frontend/src/components/CinematicBackground.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }

@@ -16,56 +16,73 @@ const courses = [
     ],
     duration: '60 minutes per session',
     frequency: '3-5 times per week',
+    benefits: [
+      'Burns 500-800 calories per session',
+      'Improves cardiovascular health',
+      'Boosts mood and energy',
+      'Builds confidence through dance',
+    ],
   },
   {
     icon: TrendingDown,
-    name: 'Weight Management Program',
-    tagline: 'Sustainable Fat Loss Solutions',
-    description: 'Comprehensive weight management program combining structured workouts, nutrition guidance, and lifestyle coaching for sustainable fat loss and improved health.',
+    name: 'Weight Management',
+    tagline: 'Sustainable Weight Loss',
+    description: 'Comprehensive weight management program combining personalized nutrition guidance, targeted workouts, and ongoing support to help you achieve and maintain your ideal weight.',
     features: [
-      'Personalized workout plans',
-      'Nutrition guidance & meal planning',
-      'Progress tracking & monitoring',
+      'Customized meal plans',
+      'Regular progress tracking',
+      'Nutritional counseling',
       'Sustainable lifestyle changes',
     ],
-    duration: '45-60 minutes per session',
-    frequency: '4-6 times per week',
+    duration: '12-week program',
+    frequency: 'Weekly check-ins',
+    benefits: [
+      'Healthy, sustainable weight loss',
+      'Improved metabolism',
+      'Better eating habits',
+      'Long-term results',
+    ],
   },
   {
     icon: User,
     name: 'Personal Training',
-    tagline: 'One-on-One Expert Guidance',
-    description: 'Customized personal training sessions tailored to your specific goals, fitness level, and preferences. Get individual attention and accelerated results.',
+    tagline: 'One-on-One Attention',
+    description: 'Individualized training sessions designed specifically for your goals, fitness level, and preferences. Get expert guidance and motivation in a private, focused environment.',
     features: [
-      'Customized fitness plans',
-      'One-on-one attention',
+      'Customized workout plans',
+      'Form correction & technique',
       'Flexible scheduling',
       'Goal-specific training',
     ],
     duration: '45-60 minutes per session',
-    frequency: 'Flexible schedule',
+    frequency: '2-4 times per week',
+    benefits: [
+      'Faster results',
+      'Personalized attention',
+      'Injury prevention',
+      'Maximum accountability',
+    ],
   },
   {
     icon: Users,
-    name: 'Group Fitness Classes',
+    name: 'Group Classes',
     tagline: 'Train Together, Grow Together',
-    description: 'Motivating group fitness classes that combine strength training, cardio, and flexibility work in a supportive, women-only environment.',
+    description: 'Dynamic group fitness classes that combine the energy of working out with others and the expertise of professional instruction. Perfect for building community while getting fit.',
     features: [
-      'Supportive community atmosphere',
-      'Variety of workout styles',
+      'Variety of class types',
       'Motivating group energy',
+      'Professional instruction',
       'Affordable pricing',
     ],
-    duration: '45-60 minutes per session',
-    frequency: '3-5 times per week',
+    duration: '45-60 minutes per class',
+    frequency: 'Multiple classes daily',
+    benefits: [
+      'Community support',
+      'Cost-effective',
+      'Fun and social',
+      'Consistent motivation',
+    ],
   },
-];
-
-const benefits = [
-  { icon: Award, text: 'Certified Expert Trainers' },
-  { icon: Heart, text: 'Women-Only Safe Environment' },
-  { icon: Clock, text: 'Flexible Timing Options' },
-  { icon: Calendar, text: 'Trial Sessions Available' },
 ];
 
 export default function CoursesPage() {
@@ -73,9 +90,9 @@ export default function CoursesPage() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-dark">
-          <div className="absolute inset-0 bg-gradient-radial from-rose-gold/20 via-transparent to-transparent opacity-40" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/30 via-gold/10 to-transparent blur-3xl animate-pulse-slow" />
+        <div className="absolute inset-0 bg-dark/70">
+          <div className="absolute inset-0 bg-gradient-radial from-rose-gold/10 via-transparent to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/15 via-gold/5 to-transparent blur-3xl animate-pulse-slow" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -94,88 +111,85 @@ export default function CoursesPage() {
 
       {/* Courses Grid */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-lighter to-dark" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80" />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="space-y-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
             {courses.map((course, index) => (
               <div
                 key={index}
-                className="glass-card p-8 md:p-12 rounded-3xl group hover:scale-[1.02] transition-all duration-300 animate-fade-up"
+                className="glass-card p-8 md:p-10 rounded-3xl space-y-6 group hover:scale-[1.02] transition-all duration-300 animate-fade-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  {/* Left: Icon & Title */}
-                  <div className="space-y-4">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-rose-gold to-gold flex items-center justify-center group-hover:scale-110 transition-transform duration-300 glow-border">
-                      <course.icon className="w-10 h-10 text-dark" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-rose-gold transition-colors">
-                        {course.name}
-                      </h3>
-                      <p className="text-gold font-semibold mt-2">{course.tagline}</p>
-                    </div>
+                {/* Header */}
+                <div className="flex items-start gap-6">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-gold to-gold flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <course.icon className="w-8 h-8 text-dark" />
                   </div>
-
-                  {/* Middle: Description & Features */}
-                  <div className="lg:col-span-2 space-y-6">
-                    <p className="text-lg text-white/80 leading-relaxed">
-                      {course.description}
+                  <div className="space-y-2">
+                    <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-rose-gold transition-colors">
+                      {course.name}
+                    </h3>
+                    <p className="text-rose-gold/80 font-semibold">
+                      {course.tagline}
                     </p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {course.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-rose-gold to-gold" />
-                          <span className="text-white/70">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 pt-4">
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5">
-                        <Clock className="w-4 h-4 text-rose-gold" />
-                        <span className="text-sm text-white/70">{course.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5">
-                        <Calendar className="w-4 h-4 text-gold" />
-                        <span className="text-sm text-white/70">{course.frequency}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Benefits Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-lighter to-dark" />
-        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-gradient-radial from-gold/20 to-transparent blur-3xl" />
+                {/* Description */}
+                <p className="text-white/70 leading-relaxed">
+                  {course.description}
+                </p>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12 animate-fade-up">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
-              <span className="bg-gradient-to-r from-rose-gold to-gold bg-clip-text text-transparent">
-                WHY CHOOSE OUR PROGRAMS
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className="glass-card p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300 animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-rose-gold to-gold flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <benefit.icon className="w-7 h-7 text-dark" />
+                {/* Features */}
+                <div className="space-y-3">
+                  <h4 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Award className="w-5 h-5 text-rose-gold" />
+                    Key Features
+                  </h4>
+                  <ul className="space-y-2">
+                    {course.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-gold mt-2 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-white font-semibold">{benefit.text}</p>
+
+                {/* Details */}
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-rose-gold/80">
+                      <Clock className="w-4 h-4" />
+                      <span className="text-sm font-semibold">Duration</span>
+                    </div>
+                    <p className="text-white/70 text-sm">{course.duration}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-rose-gold/80">
+                      <Calendar className="w-4 h-4" />
+                      <span className="text-sm font-semibold">Frequency</span>
+                    </div>
+                    <p className="text-white/70 text-sm">{course.frequency}</p>
+                  </div>
+                </div>
+
+                {/* Benefits */}
+                <div className="space-y-3">
+                  <h4 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Heart className="w-5 h-5 text-rose-gold" />
+                    Benefits
+                  </h4>
+                  <ul className="space-y-2">
+                    {course.benefits.map((benefit, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gold mt-2 flex-shrink-0" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
@@ -184,8 +198,8 @@ export default function CoursesPage() {
 
       {/* CTA Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-lighter to-dark" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/30 via-gold/10 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-rose-gold/15 via-gold/5 to-transparent blur-3xl" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-up">
@@ -195,17 +209,18 @@ export default function CoursesPage() {
               </span>
             </h2>
             <p className="text-xl text-white/80">
-              Book your free trial session today and experience the difference
+              Choose the program that fits your goals and start your transformation today
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
               <Link to="/contact">
                 <Button size="lg" className="btn-primary text-lg px-8 py-6 h-auto">
-                  BOOK FREE TRIAL
+                  BOOK A FREE TRIAL
                 </Button>
               </Link>
               <Button
                 size="lg"
-                className="btn-whatsapp text-lg px-8 py-6 h-auto"
+                variant="outline"
+                className="btn-outline text-lg px-8 py-6 h-auto"
                 asChild
               >
                 <a href="https://wa.me/919922555866" target="_blank" rel="noopener noreferrer">

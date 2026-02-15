@@ -1,10 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Simplify the Home page by removing the Transformation section and add a site-wide footer with company info and quick navigation links.
+**Goal:** Make the site-wide cinematic moving canvas background clearly visible and reliably animated behind all pages and content.
 
 **Planned changes:**
-- Remove the “Your Transformation Starts Here” section from the Home page so it no longer renders on the / route, and ensure no layout gaps remain.
-- Update the shared layout to include a responsive footer that displays “ZIN SHREYA'S ACADEMY”, a short English description, and quick links to Home (/), About Us (/about), Courses (/courses), and Contact Us (/contact), matching the existing cinematic dark luxury styling.
+- Fix global CinematicBackground layering/stacking context so the canvas renders behind all page content across routes without being hidden by document/section backgrounds, while keeping pointer-events disabled and preventing layout shifts.
+- Update the Home HeroSection overlay styling so it no longer fully obscures the global CinematicBackground (reduce/remove any fully opaque dark backdrop while maintaining text/CTA readability).
+- Improve canvas rendering quality and robustness: size the canvas using devicePixelRatio, ensure full-viewport coverage via CSS, handle resize correctly, and cleanly start/stop animation on mount/unmount.
+- Add a reduced-motion fallback that renders a static cinematic frame/gradient when `prefers-reduced-motion: reduce` is enabled.
 
-**User-visible outcome:** Visitors no longer see the Transformation section on the Home page, and all pages display a consistent footer with company information and quick links for navigation.
+**User-visible outcome:** On every page (including 404), users see a crisp cinematic background motion behind the content (or a static cinematic background with reduced motion enabled), with normal scrolling/clicking and readable hero content.
