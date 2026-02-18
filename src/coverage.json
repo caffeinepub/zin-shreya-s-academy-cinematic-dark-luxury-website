@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T19:04:16.050Z",
+  "generatedAt": "2026-02-18T13:12:29.784Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -12,81 +12,77 @@
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Make the site-wide CinematicBackground canvas reliably visible behind all content on every page by fixing stacking context/z-index layering so it is not rendered behind the document/background or covered by opaque section backgrounds.",
+        "summary": "Update the company/brand name across the website UI to exactly: \"ZIN SHREYA FITNESS ACADEMY\" (including header logo text, homepage hero title, welcome section title, footer heading, and any other visible occurrences), using consistent casing where appropriate (e.g., title-case in paragraphs if needed) while preserving existing styling.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/layouts/SiteLayout.tsx",
-          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/components/SiteHeader.tsx",
+          "frontend/src/components/HeroSection.tsx",
+          "frontend/src/components/WelcomeSection.tsx",
+          "frontend/src/components/Footer.tsx",
           "frontend/src/pages/AboutPage.tsx",
-          "frontend/src/pages/CoursesPage.tsx",
-          "frontend/src/pages/ContactPage.tsx",
-          "frontend/src/pages/NotFoundPage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/pages/ContactPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/layouts/SiteLayout.tsx",
-          "frontend/src/components/CinematicBackground.tsx",
+          "frontend/src/components/SiteHeader.tsx",
+          "frontend/src/components/HeroSection.tsx",
+          "frontend/src/components/WelcomeSection.tsx",
+          "frontend/src/components/Footer.tsx",
           "frontend/src/pages/AboutPage.tsx",
-          "frontend/src/pages/CoursesPage.tsx",
-          "frontend/src/pages/ContactPage.tsx",
-          "frontend/src/pages/NotFoundPage.tsx",
-          "frontend/src/index.css"
+          "frontend/src/pages/ContactPage.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Update HeroSection so its local 'Cinematic Background' overlay does not fully obscure the global CinematicBackground (e.g., remove the opaque `bg-dark` backdrop or make it transparent/low-opacity while keeping any intended decorative overlays).",
+        "summary": "Update SEO metadata to reflect the new company name \"ZIN SHREYA FITNESS ACADEMY\" (page titles/descriptions/keywords where the old company name appears).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/HeroSection.tsx",
-          "frontend/src/index.css"
+          "frontend/src/seo/pageMeta.ts",
+          "frontend/index.html"
         ],
         "matchedFiles": [
-          "frontend/src/components/HeroSection.tsx",
-          "frontend/src/index.css"
+          "frontend/src/seo/pageMeta.ts",
+          "frontend/index.html"
         ]
       },
       {
         "id": "REQ-3",
-        "summary": "Improve CinematicBackground rendering quality and robustness: account for devicePixelRatio in canvas sizing, ensure the canvas covers the viewport via CSS sizing (width/height 100%), and keep animation running smoothly with safe cleanup on unmount.",
+        "summary": "Add an Instagram profile link to the site footer pointing to: https://www.instagram.com/zumbawithshreya?igsh=NmhpZDN3cjFjYXZk&utm_source=qr",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/CinematicBackground.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/Footer.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/CinematicBackground.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/Footer.tsx"
         ]
       },
       {
         "id": "REQ-4",
-        "summary": "Add an accessibility/performance fallback for the cinematic background that respects `prefers-reduced-motion: reduce` by rendering a static frame (or a static gradient) instead of running requestAnimationFrame.",
+        "summary": "Add a Google Business (GMB) profile link to the site footer pointing to: https://share.google/zsIg6vFhrzd3Z589p",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/CinematicBackground.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/Footer.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/CinematicBackground.tsx",
-          "frontend/src/index.css"
+          "frontend/src/components/Footer.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/CinematicBackground.tsx",
+    "frontend/index.html",
+    "frontend/src/components/Footer.tsx",
     "frontend/src/components/HeroSection.tsx",
-    "frontend/src/index.css",
-    "frontend/src/layouts/SiteLayout.tsx",
+    "frontend/src/components/SiteHeader.tsx",
+    "frontend/src/components/WelcomeSection.tsx",
+    "frontend/src/config.ts",
     "frontend/src/pages/AboutPage.tsx",
     "frontend/src/pages/ContactPage.tsx",
-    "frontend/src/pages/CoursesPage.tsx",
-    "frontend/src/pages/NotFoundPage.tsx",
+    "frontend/src/seo/pageMeta.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

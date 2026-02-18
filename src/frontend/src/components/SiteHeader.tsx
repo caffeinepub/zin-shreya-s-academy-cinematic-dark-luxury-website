@@ -21,7 +21,7 @@ export default function SiteHeader() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-rose-gold to-gold bg-clip-text text-transparent">
-              ZIN SHREYA'S ACADEMY
+              ZIN SHREYA FITNESS ACADEMY
             </span>
           </Link>
 

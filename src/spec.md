@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Make the site-wide cinematic moving canvas background clearly visible and reliably animated behind all pages and content.
+**Goal:** Update the website branding to “ZIN SHREYA FITNESS ACADEMY” and add Instagram + Google Business links in the footer.
 
 **Planned changes:**
-- Fix global CinematicBackground layering/stacking context so the canvas renders behind all page content across routes without being hidden by document/section backgrounds, while keeping pointer-events disabled and preventing layout shifts.
-- Update the Home HeroSection overlay styling so it no longer fully obscures the global CinematicBackground (reduce/remove any fully opaque dark backdrop while maintaining text/CTA readability).
-- Improve canvas rendering quality and robustness: size the canvas using devicePixelRatio, ensure full-viewport coverage via CSS, handle resize correctly, and cleanly start/stop animation on mount/unmount.
-- Add a reduced-motion fallback that renders a static cinematic frame/gradient when `prefers-reduced-motion: reduce` is enabled.
+- Replace all visible UI occurrences of the old academy name with “ZIN SHREYA FITNESS ACADEMY” (header brand text, homepage hero, welcome section title, footer heading/copyright, and any About/Contact references) while preserving existing styling and natural casing in sentences.
+- Update SEO metadata (titles/descriptions/keywords) to use “ZIN SHREYA FITNESS ACADEMY” wherever the old name appears, ensuring document titles reflect the updates per route.
+- Add an Instagram link in the footer pointing to https://www.instagram.com/zumbawithshreya?igsh=NmhpZDN3cjFjYXZk&utm_source=qr that opens in a new tab with rel="noopener noreferrer" and matches existing footer styling.
+- Add a Google Business link in the footer pointing to https://share.google/zsIg6vFhrzd3Z589p that opens in a new tab with rel="noopener noreferrer" and matches existing footer styling.
 
-**User-visible outcome:** On every page (including 404), users see a crisp cinematic background motion behind the content (or a static cinematic background with reduced motion enabled), with normal scrolling/clicking and readable hero content.
+**User-visible outcome:** The site consistently displays the updated academy name across pages, has updated SEO/browser titles, and the footer includes working Instagram and Google Business links.

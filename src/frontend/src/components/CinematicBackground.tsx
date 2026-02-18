@@ -1,9 +1,24 @@
 import { useEffect, useRef } from 'react';
+import { perfTime, perfTimeEnd } from '../utils/perf';
+
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  opacity: number;
+}
 
 export default function CinematicBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameIdRef = useRef<number | undefined>(undefined);
+  const timeRef = useRef(0);
+  const isVisibleRef = useRef(true);
+  const particlesRef = useRef<Particle[]>([]);
 
   useEffect(() => {
+    perfTime('CinematicBackground:init');
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -18,11 +33,41 @@ export default function CinematicBackground() {
     const handleMotionChange = (e: MediaQueryListEvent) => {
       shouldAnimate = !e.matches;
       if (!shouldAnimate) {
-        // Render one static frame
         renderStaticFrame();
+      } else if (isVisibleRef.current) {
+        animate();
       }
     };
     prefersReducedMotion.addEventListener('change', handleMotionChange);
+
+    // Pause animation when tab is hidden
+    const handleVisibilityChange = () => {
+      isVisibleRef.current = !document.hidden;
+      
+      if (document.hidden) {
+        // Tab hidden - cancel animation
+        if (animationFrameIdRef.current !== undefined) {
+          cancelAnimationFrame(animationFrameIdRef.current);
+          animationFrameIdRef.current = undefined;
+        }
+      } else if (shouldAnimate) {
+        // Tab visible again - resume animation
+        animate();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Debounced resize handler to avoid excessive work
+    let resizeTimeout: number;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        perfTime('CinematicBackground:resize');
+        resizeCanvas();
+        initParticles();
+        perfTimeEnd('CinematicBackground:resize');
+      }, 150);
+    };
 
     // Set canvas size with device pixel ratio for crisp rendering
     const resizeCanvas = () => {
@@ -37,33 +82,24 @@ export default function CinematicBackground() {
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       
+      // CRITICAL FIX: Reset transform before scaling to avoid cumulative scaling
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       // Scale context to match DPR
       ctx.scale(dpr, dpr);
     };
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', debouncedResize);
 
-    // Particle system
-    interface Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-    }
-
-    const particles: Particle[] = [];
     const particleCount = window.innerWidth < 768 ? 15 : 30;
 
     // Initialize particles
     const initParticles = () => {
-      particles.length = 0;
       const width = canvas.width / (window.devicePixelRatio || 1);
       const height = canvas.height / (window.devicePixelRatio || 1);
       
+      particlesRef.current = [];
       for (let i = 0; i < particleCount; i++) {
-        particles.push({
+        particlesRef.current.push({
           x: Math.random() * width,
           y: Math.random() * height,
           size: Math.random() * 4 + 2,
@@ -74,9 +110,6 @@ export default function CinematicBackground() {
       }
     };
     initParticles();
-
-    let animationFrameId: number;
-    let time = 0;
 
     const renderFrame = (currentTime: number) => {
       const width = canvas.width / (window.devicePixelRatio || 1);
@@ -134,14 +167,18 @@ export default function CinematicBackground() {
       ctx.fillRect(0, 0, width, height);
       ctx.globalCompositeOperation = 'source-over';
 
+      // OPTIMIZATION: Set filter once before particle loop
+      ctx.filter = 'blur(8px)';
+      
       // Draw and update particles
-      particles.forEach((particle) => {
+      const particles = particlesRef.current;
+      for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i];
+        
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-        ctx.filter = 'blur(8px)';
         ctx.fill();
-        ctx.filter = 'none';
 
         // Update particle position
         particle.x += particle.speedX;
@@ -152,7 +189,10 @@ export default function CinematicBackground() {
         if (particle.x > width + 10) particle.x = -10;
         if (particle.y < -10) particle.y = height + 10;
         if (particle.y > height + 10) particle.y = -10;
-      });
+      }
+      
+      // Reset filter once after particle loop
+      ctx.filter = 'none';
     };
 
     const renderStaticFrame = () => {
@@ -161,25 +201,33 @@ export default function CinematicBackground() {
     };
 
     const animate = () => {
-      if (!shouldAnimate) return;
+      // Check if we should continue animating
+      if (!shouldAnimate || !isVisibleRef.current) {
+        animationFrameIdRef.current = undefined;
+        return;
+      }
       
-      time += 0.001;
-      renderFrame(time);
-      animationFrameId = requestAnimationFrame(animate);
+      timeRef.current += 0.001;
+      renderFrame(timeRef.current);
+      animationFrameIdRef.current = requestAnimationFrame(animate);
     };
 
     // Start animation or render static frame
-    if (shouldAnimate) {
+    if (shouldAnimate && isVisibleRef.current) {
       animate();
     } else {
       renderStaticFrame();
     }
 
+    perfTimeEnd('CinematicBackground:init');
+
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', debouncedResize);
       prefersReducedMotion.removeEventListener('change', handleMotionChange);
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      clearTimeout(resizeTimeout);
+      if (animationFrameIdRef.current !== undefined) {
+        cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
   }, []);

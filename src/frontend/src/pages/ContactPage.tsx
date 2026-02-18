@@ -80,7 +80,7 @@ export default function ContactPage() {
                   <div className="space-y-2">
                     <h3 className="text-2xl font-black text-white">Our Location</h3>
                     <p className="text-white/70 text-lg leading-relaxed">
-                      Zin Shreya's Academy<br />
+                      ZIN SHREYA FITNESS ACADEMY<br />
                       Nashik, Maharashtra
                     </p>
                   </div>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Zin Shreya's Academy Location"
+                  title="ZIN SHREYA FITNESS ACADEMY Location"
                 />
               </div>
               <div className="mt-4 text-center">

@@ -1,11 +1,12 @@
 import { Heart } from 'lucide-react';
+import { SiInstagram, SiGoogle } from 'react-icons/si';
 import { Link } from '@tanstack/react-router';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const appIdentifier = typeof window !== 'undefined' 
     ? encodeURIComponent(window.location.hostname) 
-    : 'zin-shreyas-academy';
+    : 'zin-shreya-fitness-academy';
 
   const quickLinks = [
     { label: 'Home', path: '/' },
@@ -21,7 +22,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-rose-gold tracking-wide">
-              ZIN SHREYA'S ACADEMY
+              ZIN SHREYA FITNESS ACADEMY
             </h3>
             <p className="text-white/70 text-sm leading-relaxed">
               Transform your fitness journey with expert-led Zumba classes, personalized training, and comprehensive weight management programs in Nashik.
@@ -55,6 +56,26 @@ export default function Footer() {
               <p>Nashik, Maharashtra</p>
               <p>Phone: +91 98765 43210</p>
             </div>
+            <div className="flex gap-4 pt-2">
+              <a
+                href="https://www.instagram.com/zumbawithshreya?igsh=NmhpZDN3cjFjYXZk&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-rose-gold transition-colors"
+                aria-label="Instagram"
+              >
+                <SiInstagram className="w-6 h-6" />
+              </a>
+              <a
+                href="https://share.google/zsIg6vFhrzd3Z589p"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-rose-gold transition-colors"
+                aria-label="Google Business"
+              >
+                <SiGoogle className="w-6 h-6" />
+              </a>
+            </div>
           </div>
         </div>
 
@@ -62,7 +83,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
             <p className="text-white/60 text-sm">
-              © {currentYear} ZIN SHREYA'S ACADEMY. All rights reserved.
+              © {currentYear} ZIN SHREYA FITNESS ACADEMY. All rights reserved.
             </p>
             <p className="text-white/60 text-sm flex items-center justify-center gap-2">
               Built with <Heart className="w-4 h-4 text-rose-gold fill-rose-gold" /> using{' '}

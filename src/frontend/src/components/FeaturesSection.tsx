@@ -1,12 +1,36 @@
 import { Shield, LineChart, Music, Smile, Clock, DollarSign } from 'lucide-react';
 
 const features = [
-  { icon: Shield, title: 'Safe Women-Only Training Environment' },
-  { icon: LineChart, title: 'Scientifically Structured Weight Loss Plans' },
-  { icon: Music, title: 'Energetic Zumba Sessions' },
-  { icon: Smile, title: 'Confidence Building Through Fitness' },
-  { icon: Clock, title: 'Flexible Timings' },
-  { icon: DollarSign, title: 'Affordable Packages' },
+  { 
+    icon: Shield, 
+    title: 'Safe Women-Only Training Environment',
+    description: 'Train in a comfortable, supportive space designed exclusively for women, where you can focus on your fitness goals without any distractions.'
+  },
+  { 
+    icon: LineChart, 
+    title: 'Scientifically Structured Weight Loss Plans',
+    description: 'Follow evidence-based programs tailored to your body type and goals, ensuring sustainable and healthy weight loss results.'
+  },
+  { 
+    icon: Music, 
+    title: 'Energetic Zumba Sessions',
+    description: 'Dance your way to fitness with high-energy Zumba classes that combine fun Latin rhythms with effective cardio workouts.'
+  },
+  { 
+    icon: Smile, 
+    title: 'Confidence Building Through Fitness',
+    description: 'Transform not just your body but your mindset, gaining self-assurance and empowerment through every workout session.'
+  },
+  { 
+    icon: Clock, 
+    title: 'Flexible Timings',
+    description: 'Choose from multiple batch timings throughout the day to fit your busy schedule, making fitness accessible and convenient.'
+  },
+  { 
+    icon: DollarSign, 
+    title: 'Affordable Packages',
+    description: 'Access premium fitness training at competitive prices with flexible membership options that suit your budget and commitment level.'
+  },
 ];
 
 export default function FeaturesSection() {
@@ -25,7 +49,7 @@ export default function FeaturesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <div
-              key={index}
+              key={feature.title}
               className="flip-card group animate-fade-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -42,9 +66,9 @@ export default function FeaturesSection() {
 
                 {/* Back */}
                 <div className="flip-card-back glass-card p-8 rounded-2xl flex items-center justify-center text-center glow-border bg-gradient-to-br from-rose-gold/20 to-gold/20">
-                  <h3 className="text-xl font-bold text-white">
-                    {feature.title}
-                  </h3>
+                  <p className="text-base text-white/90 leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             </div>

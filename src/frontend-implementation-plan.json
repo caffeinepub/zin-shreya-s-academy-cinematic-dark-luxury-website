@@ -1,112 +1,101 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Restore and enhance site-wide CinematicBackground visibility, quality, and reduced-motion behavior",
+  "title": "Update brand name and add Instagram + Google Business footer links",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Ensure the global CinematicBackground canvas is always visible behind all page content via correct stacking context and non-opaque section backdrops.",
+      "summary": "Replace all visible occurrences of the old academy name with \"ZIN SHREYA FITNESS ACADEMY\" while preserving existing styling and natural casing in paragraphs.",
       "acceptanceCriteria": [
-        "When loading any route (Home, About, Courses, Contact, 404), the animated background is clearly visible behind the page content.",
-        "The background layer does not block clicks/scroll (pointer events remain disabled) and does not shift layout.",
-        "The background remains visible while scrolling and behind the sticky header/footer."
+        "Site header brand text shows \"ZIN SHREYA FITNESS ACADEMY\".",
+        "Homepage hero brand name shows \"ZIN SHREYA FITNESS ACADEMY\".",
+        "Welcome section title shows \"WELCOME TO ZIN SHREYA FITNESS ACADEMY\" (matching existing style/casing conventions).",
+        "Footer company heading and copyright line use the new name.",
+        "About/Contact page body text that references the academy name is updated to the new name without introducing grammar issues.",
+        "No remaining visible occurrences of the old name \"ZIN SHREYA'S ACADEMY\" / \"Zin Shreya's Academy\" in the rendered UI."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/layouts/SiteLayout.tsx",
+          "path": "frontend/src/components/SiteHeader.tsx",
           "operation": "modify",
-          "description": "Adjust layout layering so CinematicBackground sits above the document/body background but below all interactive content: remove/avoid an opaque layout background that hides the canvas, and ensure header/main/footer/overlays render in a higher z-layer than the canvas while preserving sticky header behavior."
+          "description": "Update the header logo/brand text to exactly \"ZIN SHREYA FITNESS ACADEMY\" while keeping existing classes and layout unchanged."
         },
         {
-          "path": "frontend/src/components/CinematicBackground.tsx",
+          "path": "frontend/src/components/HeroSection.tsx",
           "operation": "modify",
-          "description": "Update canvas element positioning/z-index to be a stable site-wide background layer (fixed, viewport-sized) that remains behind all content but above the body background, and continues to ignore pointer events."
+          "description": "Update the homepage hero brand name text to exactly \"ZIN SHREYA FITNESS ACADEMY\" without changing styling/animations."
+        },
+        {
+          "path": "frontend/src/components/WelcomeSection.tsx",
+          "operation": "modify",
+          "description": "Update the welcome section title to \"WELCOME TO ZIN SHREYA FITNESS ACADEMY\" and update the paragraph text to reference the new academy name with natural sentence casing."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Update footer company heading and copyright text to use \"ZIN SHREYA FITNESS ACADEMY\" (and ensure no other visible old-name occurrences remain)."
         },
         {
           "path": "frontend/src/pages/AboutPage.tsx",
           "operation": "modify",
-          "description": "Update the page hero/section absolute backdrop layers to avoid fully opaque backgrounds (e.g., replace solid bg-dark with transparent/low-opacity variants) so the global CinematicBackground remains visible behind content throughout the page."
-        },
-        {
-          "path": "frontend/src/pages/CoursesPage.tsx",
-          "operation": "modify",
-          "description": "Update the page hero/section absolute backdrop layers to avoid fully opaque backgrounds so the global CinematicBackground remains visible behind content throughout the page."
+          "description": "Update About page body text occurrences of \"Zin Shreya's Academy\" to the new academy name with sentence-appropriate casing and grammar preserved (including CTA section sentence)."
         },
         {
           "path": "frontend/src/pages/ContactPage.tsx",
           "operation": "modify",
-          "description": "Update the page hero/section absolute backdrop layers to avoid fully opaque backgrounds so the global CinematicBackground remains visible behind content throughout the page."
-        },
-        {
-          "path": "frontend/src/pages/NotFoundPage.tsx",
-          "operation": "modify",
-          "description": "Reduce/remove the fully opaque 404 page background backdrop so the global CinematicBackground remains visible behind the 404 content."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add/adjust global utility styles to support consistent background layering (e.g., a shared translucent section-backdrop utility and/or a dedicated background layer class) to prevent opaque sections from obscuring the global canvas."
+          "description": "Update Contact page location block text and map iframe title to use the new academy name with appropriate casing, preserving existing formatting (e.g., line breaks)."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Make HeroSection overlays decorative and readable without obscuring the global CinematicBackground.",
+      "summary": "Update SEO metadata (titles/descriptions/keywords) to reflect the new company name and ensure document titles reflect updated metadata per route.",
       "acceptanceCriteria": [
-        "On the Home page hero, the global moving background remains visible and cinematic while hero text and CTAs remain readable.",
-        "No full-opaque layer in HeroSection completely blocks the site-wide animated background."
+        "Route metadata in frontend/src/seo/pageMeta.ts no longer contains the old company name and includes the new name in titles/descriptions where applicable.",
+        "Browser tab title (document title) for each route reflects the updated metadata."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/HeroSection.tsx",
+          "path": "frontend/src/seo/pageMeta.ts",
           "operation": "modify",
-          "description": "Replace the HeroSection’s solid/opaque backdrop (e.g., bg-dark) with transparent or low-opacity overlays, keeping the intended gradients/spotlight effects while ensuring the global CinematicBackground is visible underneath."
+          "description": "Replace old academy name references in route titles/descriptions/keywords with \"ZIN SHREYA FITNESS ACADEMY\" (keeping route-specific phrasing intact)."
         },
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "If needed for consistency/readability, add a reusable translucent hero-backdrop utility (or tune existing utilities) so the hero remains readable without blocking the global animated background."
+          "description": "Update the initial HTML <title> to reflect the new academy name so first paint/initial tab title aligns with branding before route metadata hydration."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Improve CinematicBackground canvas crispness, viewport coverage, resize handling, and animation lifecycle cleanup.",
+      "summary": "Add an Instagram footer link that opens the provided profile URL in a new tab with proper rel attributes and matching footer styling.",
       "acceptanceCriteria": [
-        "On high-DPI displays (e.g., Retina), the background looks crisp (not blurry/pixelated).",
-        "Resizing the browser keeps the animation correctly scaled and filling the viewport without distortion.",
-        "No console errors occur related to the background animation lifecycle (mount/unmount/resize)."
+        "Footer displays an Instagram link labeled in English (e.g., \"Instagram\") that opens the provided URL in a new tab.",
+        "External link uses rel=\"noopener noreferrer\".",
+        "Link styling matches existing footer typography/colors and hover effects."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/CinematicBackground.tsx",
+          "path": "frontend/src/components/Footer.tsx",
           "operation": "modify",
-          "description": "Refactor canvas sizing to account for devicePixelRatio (CSS size = viewport; internal buffer scaled by DPR and context scaled accordingly), handle resize with stable listeners, keep animation smooth, and ensure requestAnimationFrame is always canceled and listeners removed on unmount to prevent lifecycle errors."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Ensure the canvas uses CSS sizing that reliably covers the viewport (width/height 100%, fixed inset) without affecting layout, including any needed global rules for the background layer class used by CinematicBackground."
+          "description": "Add an \"Instagram\" external link in the footer pointing to https://www.instagram.com/zumbawithshreya?igsh=NmhpZDN3cjFjYXZk&utm_source=qr, opening in a new tab with rel=\"noopener noreferrer\", and using existing footer link classes/hover styles."
         }
       ]
     },
     {
       "id": "REQ-4",
-      "summary": "Respect prefers-reduced-motion by rendering a static cinematic background instead of running continuous animation.",
+      "summary": "Add a Google Business footer link that opens the provided URL in a new tab with proper rel attributes and matching footer styling.",
       "acceptanceCriteria": [
-        "If the OS/browser has reduced motion enabled, the background becomes non-animated while still visually cinematic and readable behind content.",
-        "If reduced motion is not enabled, the background animates normally."
+        "Footer displays a Google Business link labeled in English (e.g., \"Google Business\") that opens the provided URL in a new tab.",
+        "External link uses rel=\"noopener noreferrer\".",
+        "Link styling matches existing footer typography/colors and hover effects."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/CinematicBackground.tsx",
+          "path": "frontend/src/components/Footer.tsx",
           "operation": "modify",
-          "description": "Add prefers-reduced-motion detection (e.g., matchMedia) so that when reduced motion is enabled the component renders a single static frame (or static gradient) and does not start/continue requestAnimationFrame; when disabled, animate normally. Include safe cleanup for media query listeners on unmount."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Extend reduced-motion CSS considerations if needed (e.g., ensure any background-related CSS animations or filters used for the cinematic effect are disabled/softened under prefers-reduced-motion) while keeping the static background visually cinematic."
+          "description": "Add a \"Google Business\" external link in the footer pointing to https://share.google/zsIg6vFhrzd3Z589p, opening in a new tab with rel=\"noopener noreferrer\", and using existing footer link classes/hover styles."
         }
       ]
     }

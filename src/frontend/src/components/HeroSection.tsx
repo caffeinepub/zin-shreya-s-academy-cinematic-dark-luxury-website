@@ -26,7 +26,7 @@ export default function HeroSection() {
           {/* Brand Name */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
             <span className="bg-gradient-to-r from-rose-gold via-gold to-rose-gold bg-clip-text text-transparent animate-shimmer">
-              ZIN SHREYA'S ACADEMY
+              ZIN SHREYA FITNESS ACADEMY
             </span>
           </h1>
 

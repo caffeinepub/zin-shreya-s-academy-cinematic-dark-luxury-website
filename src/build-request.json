@@ -1,99 +1,95 @@
 {
   "kind": "build_request",
-  "title": "Fix cinematic moving background visibility and make it clearly animated site-wide",
+  "title": "Update branding name and add Instagram + Google Business links in footer",
+  "projectName": "Zin Shreya Fitness",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Make the site-wide CinematicBackground canvas reliably visible behind all content on every page by fixing stacking context/z-index layering so it is not rendered behind the document/background or covered by opaque section backgrounds.",
+      "text": "Update the company/brand name across the website UI to exactly: \"ZIN SHREYA FITNESS ACADEMY\" (including header logo text, homepage hero title, welcome section title, footer heading, and any other visible occurrences), using consistent casing where appropriate (e.g., title-case in paragraphs if needed) while preserving existing styling.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
+          "change the company name to \" ZIN SHREYA FITNESS ACADEMY\"."
         ]
       },
       "acceptanceCriteria": [
-        "When loading any route (Home, About, Courses, Contact, 404), the animated background is clearly visible behind the page content.",
-        "The background layer does not block clicks/scroll (pointer events remain disabled) and does not shift layout.",
-        "The background remains visible while scrolling and behind the sticky header/footer."
+        "Site header brand text shows \"ZIN SHREYA FITNESS ACADEMY\".",
+        "Homepage hero brand name shows \"ZIN SHREYA FITNESS ACADEMY\".",
+        "Welcome section title shows \"WELCOME TO ZIN SHREYA FITNESS ACADEMY\" (matching existing style/casing conventions).",
+        "Footer company heading and copyright line use the new name.",
+        "About/Contact page body text that references the academy name is updated to the new name without introducing grammar issues.",
+        "No remaining visible occurrences of the old name \"ZIN SHREYA'S ACADEMY\" / \"Zin Shreya's Academy\" in the rendered UI."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Update HeroSection so its local 'Cinematic Background' overlay does not fully obscure the global CinematicBackground (e.g., remove the opaque `bg-dark` backdrop or make it transparent/low-opacity while keeping any intended decorative overlays).",
+      "text": "Update SEO metadata to reflect the new company name \"ZIN SHREYA FITNESS ACADEMY\" (page titles/descriptions/keywords where the old company name appears).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
+          "change the company name to \" ZIN SHREYA FITNESS ACADEMY\"."
         ]
       },
       "acceptanceCriteria": [
-        "On the Home page hero, the global moving background remains visible and cinematic while hero text and CTAs remain readable.",
-        "No full-opaque layer in HeroSection completely blocks the site-wide animated background."
+        "Route metadata in frontend/src/seo/pageMeta.ts no longer contains the old company name and includes the new name in titles/descriptions where applicable.",
+        "Browser tab title (document title) for each route reflects the updated metadata."
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Improve CinematicBackground rendering quality and robustness: account for devicePixelRatio in canvas sizing, ensure the canvas covers the viewport via CSS sizing (width/height 100%), and keep animation running smoothly with safe cleanup on unmount.",
+      "text": "Add an Instagram profile link to the site footer pointing to: https://www.instagram.com/zumbawithshreya?igsh=NmhpZDN3cjFjYXZk&utm_source=qr",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
+          "add instagram profile in the footer: https://www.instagram.com/zumbawithshreya?igsh=NmhpZDN3cjFjYXZk&utm_source=qr"
         ]
       },
       "acceptanceCriteria": [
-        "On high-DPI displays (e.g., Retina), the background looks crisp (not blurry/pixelated).",
-        "Resizing the browser keeps the animation correctly scaled and filling the viewport without distortion.",
-        "No console errors occur related to the background animation lifecycle (mount/unmount/resize)."
+        "Footer displays an Instagram link labeled in English (e.g., \"Instagram\") that opens the provided URL in a new tab.",
+        "External link uses rel=\"noopener noreferrer\".",
+        "Link styling matches existing footer typography/colors and hover effects."
       ]
     },
     {
       "id": "REQ-4",
-      "text": "Add an accessibility/performance fallback for the cinematic background that respects `prefers-reduced-motion: reduce` by rendering a static frame (or a static gradient) instead of running requestAnimationFrame.",
+      "text": "Add a Google Business (GMB) profile link to the site footer pointing to: https://share.google/zsIg6vFhrzd3Z589p",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "the cinematic moving background is not visible, i want a proper moving background to look cinematic"
+          "add gmb profile in the footer : https://share.google/zsIg6vFhrzd3Z589p"
         ]
       },
       "acceptanceCriteria": [
-        "If the OS/browser has reduced motion enabled, the background becomes non-animated while still visually cinematic and readable behind content.",
-        "If reduced motion is not enabled, the background animates normally."
+        "Footer displays a Google Business link labeled in English (e.g., \"Google Business\") that opens the provided URL in a new tab.",
+        "External link uses rel=\"noopener noreferrer\".",
+        "Link styling matches existing footer typography/colors and hover effects."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (Shadcn UI components are read-only).",
-    "Do not edit frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths)."
+    "Do not modify any files under frontend/src/components/ui or other paths listed as immutable in SYSTEM_CONTEXT.",
+    "Backend (Motoko) should remain unchanged; these are frontend-only content/link updates."
   ],
   "nonGoals": [
-    "Adding new pages or new business features unrelated to the cinematic background.",
-    "Introducing a new backend canister or backend APIs (this is a frontend-only fix)."
+    "Do not add or change authentication flows.",
+    "Do not change phone numbers, WhatsApp links, addresses, or map embed locations unless required solely to update the academy name text.",
+    "Do not add additional social links beyond Instagram and Google Business."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

@@ -10,7 +10,7 @@ export default function WelcomeSection() {
           <div className="space-y-4 animate-fade-up">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
               <span className="bg-gradient-to-r from-rose-gold to-gold bg-clip-text text-transparent">
-                WELCOME TO ZIN SHREYA'S ACADEMY
+                WELCOME TO ZIN SHREYA FITNESS ACADEMY
               </span>
             </h2>
             <div className="flex items-center justify-center gap-4">
@@ -24,7 +24,7 @@ export default function WelcomeSection() {
 
           {/* Content */}
           <p className="text-lg md:text-xl text-white/80 leading-relaxed animate-fade-up animation-delay-200">
-            Zin Shreya's Academy is built to empower women through structured fitness programs designed exclusively for females. With certified trainers and years of expertise in weight management, we focus on sustainable fat loss, improved stamina, and confidence building in a safe and supportive environment.
+            ZIN SHREYA FITNESS ACADEMY is built to empower women through structured fitness programs designed exclusively for females. With certified trainers and years of expertise in weight management, we focus on sustainable fat loss, improved stamina, and confidence building in a safe and supportive environment.
           </p>
 
           {/* CTA */}
